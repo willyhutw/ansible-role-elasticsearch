@@ -1,0 +1,6 @@
+---
+
+- include: debian/jre-debian.yml
+- include: debian/elasticsearch-debian.yml
+- include: debian/curator-debian.yml
+

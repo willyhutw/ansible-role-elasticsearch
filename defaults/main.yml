@@ -1,0 +1,16 @@
+---
+
+es_cluster_name: es_cluster
+es_api_port: 9200
+es_transport_port: 9300
+elasticsearch_hosts:
+  - 127.0.0.1
+curator_venv_path: /home/curator_env
+curator_log_path: /home/curator_env/curator.log
+curator_index_keep_day: 3
+curator_packages:
+  - click==6.7
+  - elasticsearch==2.4.1
+  - PyYAML==3.12
+  - voluptuous==0.9.3
+  - elasticsearch-curator==4.2.5

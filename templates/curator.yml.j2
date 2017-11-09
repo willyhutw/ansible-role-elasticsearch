@@ -1,0 +1,27 @@
+---
+# Remember, leave a key empty if there is no value.  None will be a string,
+# not a Python "NoneType"
+
+client:
+  hosts:
+  - {% for ip in elasticsearch_hosts %}{% if ip in hostvars[inventory_hostname]['ansible_all_ipv4_addresses'] %}{{ip}}{% endif %}{% endfor %}
+  port: {{es_api_port}}
+  url_prefix:
+  use_ssl: False
+  certificate:
+  client_cert:
+  client_key:
+  aws_key:
+  aws_secret_key:
+  aws_region:
+  ssl_no_validate: False
+  http_auth:
+  timeout: 30
+  master_only: False
+
+logging:
+  loglevel: INFO
+  logfile: {{curator_log_path}}
+  logformat: default
+  blacklist: []
+

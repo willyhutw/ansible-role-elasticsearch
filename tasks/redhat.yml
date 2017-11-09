@@ -1,0 +1,6 @@
+---
+
+- include: redhat/jre-redhat.yml
+- include: redhat/elasticsearch-redhat.yml
+- include: redhat/curator-redhat.yml
+

@@ -1,0 +1,31 @@
+---
+
+- name: (elasticsearch-debian) | check elasticsearch
+  shell: dpkg -l | grep elasticsearch
+  register: elasticsearch_installed
+  ignore_errors: yes
+
+
+- name: (elasticsearch-debian) | remove elasticsearch
+  apt:
+    name: elasticsearch
+    state: absent
+    purge: yes
+  when: elasticsearch_installed.rc == 0
+
+
+- name: (elasticsearch-debian) | wget elasticsearch package
+  get_url:
+    url: https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.4.4/elasticsearch-2.4.4.deb
+    dest: /tmp/elasticsearch-2.4.4.deb
+
+
+- name: (elasticsearch-debian) | install elasticsearch
+  shell: dpkg -i /tmp/elasticsearch-2.4.4.deb
+
+
+- name: (elasticsearch-debian) | remove temp package
+  file:
+    path: /tmp/elasticsearch-2.4.4.deb
+    state: absent
+

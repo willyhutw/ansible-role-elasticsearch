@@ -1,0 +1,32 @@
+---
+
+- name: (elasticsearch-redhat) | check elasticsearch
+  shell: rpm -qa | grep elasticsearch
+  register: elasticsearch_installed
+  ignore_errors: yes
+
+
+- name: (elasticsearch-redhat) | remove elasticsearch
+  yum:
+    name: elasticsearch
+    state: absent
+  when: elasticsearch_installed.rc == 0
+
+
+- name: (elasticsearch-redhat) | wget elasticsearch package
+  get_url:
+    url: https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/2.4.4/elasticsearch-2.4.4.rpm
+    dest: /tmp/elasticsearch-2.4.4.rpm
+
+    
+- name: (elasticsearch-redhat) | install elasticsearch
+  yum:
+    name: /tmp/elasticsearch-2.4.4.rpm
+    state: present
+
+
+- name: (elasticsearch-redhat) | remove temp package
+  file:
+    path: /tmp/elasticsearch-2.4.4.rpm
+    state: absent
+
