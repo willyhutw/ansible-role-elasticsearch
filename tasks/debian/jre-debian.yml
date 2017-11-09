@@ -13,7 +13,6 @@
     - ansible_distribution == "Ubuntu"
     - ansible_distribution_major_version == "14"
     - openjdk_installed.rc != 0
-    - use_private_repo != True
 
 
 - name: (jre-debian) | install openjdk
